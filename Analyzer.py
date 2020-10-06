@@ -19,6 +19,7 @@ all_reviews=[]
 data_train=[]
 #Functions
 def addtrainfile():
+    global data_train
     for widget in can.winfo_children():
         widget.destroy
 
@@ -67,18 +68,18 @@ def clean_text(df):
         all_reviews.append(words)
     return all_reviews
 
-def prediction(data_train):
-    # data_imdb=pd.read_csv('imdb_labelled.txt', delimiter='\t', header=None)
-    # data_imdb.columns= ['Reviews_text', 'Review_Class']
+def prediction():
+    data_imdb=pd.read_csv('imdb_labelled.txt', delimiter='\t', header=None)
+    data_imdb.columns= ['Reviews_text', 'Review_Class']
 
-    # data_amazon = pd.read_csv("amazon_cells_labelled.txt", delimiter='\t', header=None)
-    # data_amazon.columns = ["Reviews_text", "Review_Class"]
+    data_amazon = pd.read_csv("amazon_cells_labelled.txt", delimiter='\t', header=None)
+    data_amazon.columns = ["Reviews_text", "Review_Class"]
 
-    # data_yelp = pd.read_csv("yelp_labelled.txt", delimiter='\t', header=None)
-    # data_yelp.columns = ["Reviews_text", "Review_Class"]
+    data_yelp = pd.read_csv("yelp_labelled.txt", delimiter='\t', header=None)
+    data_yelp.columns = ["Reviews_text", "Review_Class"]
 
-    # data = pd.concat([data_imdb, data_amazon, data_yelp])
-    data=data_train
+    data = pd.concat([data_imdb, data_amazon, data_yelp])
+    # data=data_train
     all_reviews = clean_text(data)
     TV = TfidfVectorizer(min_df=3)   
     X = TV.fit_transform(all_reviews).toarray()
